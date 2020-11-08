@@ -18,10 +18,6 @@ namespace Koshka
             cat2.MakeNoise();
             Console.WriteLine($"Коту по имени {cat2.Name} уже {cat2.GetAge()} лет");
 
-            CatSmartHouse catHouse = new CatSmartHouse(900);
-            catHouse.AddCat(cat);
-            catHouse.AddCat(cat2);
-
             Console.ReadLine();
         }
     }
