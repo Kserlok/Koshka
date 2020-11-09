@@ -31,7 +31,7 @@ namespace Koshka
                 {
                     needFood = (byte)FoodResourse;
                     FoodResourse = 0;
-                }
+                } 
                 cat.Feed(needFood);
                 Console.WriteLine($"Покормили кота по имени: {cat.Name}\n Еды осталось: {FoodResourse}");
             }
