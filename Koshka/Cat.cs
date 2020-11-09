@@ -18,15 +18,16 @@ namespace Koshka
         }
     public string Name
     {
-         get; set;
-    }
-        public DateTime BirthDay
-        {
-            get; set;
+            get;
+            set;
         }
         public void MakeNoise()
         {
-            Console.WriteLine(Name + " мяукает");
+            Console.WriteLine($"{Name } мяукает");
+        }
+        public DateTime BirthDay
+        {
+            get; set;
         }
 
         public int GetAge()
