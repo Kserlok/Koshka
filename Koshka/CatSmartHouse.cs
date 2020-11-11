@@ -6,7 +6,7 @@ namespace Koshka
 {
     class CatSmartHouse
     {
-        List<Cat> cats = new List<Cat>();
+        List<Cat> cats = new List<Cat>(); 
         public CatSmartHouse(int foodResourse)
         {
             FoodResourse = foodResourse;
