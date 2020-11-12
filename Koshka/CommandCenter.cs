@@ -14,26 +14,20 @@ namespace Koshka
             WaitCommand();
         }
 
-        public CommandCenter()
-        {
-        }
-        private void WaitCommand() { }
-
         public CatSmartHouse CatSmartHouse { get; set; }
 
-        public void WaitCommand(Cat cat, CatSmartHouse CatHouse)
+        public void WaitCommand()
         {
-
             string command = "";
             while (command != "exit")
             {
-                Console.SetCursorPosition(0, CatHouse.CatsCount + 1);
+                Console.SetCursorPosition(0, CatSmartHouse.CatsCount + 1);
                 command = Console.ReadLine();
                 string[] array = command.Split();
                 if (array[0] == "store")
                 {
                     int smth = Convert.ToInt32(array[2]);
-                    CatHouse.FoodResourse += smth;
+                    CatSmartHouse.FoodResourse += smth;
 
                 }
 
