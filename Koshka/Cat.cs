@@ -67,7 +67,7 @@ namespace Koshka
             string name = Name;
             string age = Convert.ToString(GetAge());
             string status = Convert.ToString(HungryStatus);
-            Console.WriteLine($" {Name}, Возрост: {GetAge()}, {HungryStatus}");
+            Console.WriteLine($" {Name}, Возраст: {GetAge()}, {HungryStatus}");
             if (HungryStatus < 10)
             {
                 color = Convert.ToString(Convert.ToInt32(Console.ForegroundColor = ConsoleColor.DarkRed));
