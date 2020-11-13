@@ -29,37 +29,40 @@ namespace Koshka
             var cat = (Cat)sender;
             if (cat.HungryStatus <= 20 && FoodResourse > 0)
             {
-                byte needFood = (byte)(100 - cat.HungryStatus);
+                sbyte needFood = (sbyte)(100 - cat.HungryStatus);
                 if (FoodResourse > needFood)
                     FoodResourse -= needFood;
                 else
                 {
-                    needFood = (byte)FoodResourse;
+                    needFood = (sbyte)FoodResourse;
                     FoodResourse = 0;
                 }
                 cat.Feed(needFood);
-                PrintStatus();
             }
+            PrintStatus();
         }
 
+        static object lockl = true;
         public void PrintStatus()
         {
-
-            int leftPosition = Console.CursorLeft;
-            int topPosition = Console.CursorTop;
-
-            for (int i = 0; i < cats.Count; i++)
+            lock (lockl)
             {
-                string message = cats[i].GetStatus("");
-                int color = Convert.ToInt32(message.Substring(0, 1));
-                Console.SetCursorPosition(0, i);
-                Console.ForegroundColor = (ConsoleColor)color;
-                Console.Write(message.Substring(2).Trim().PadRight(50));
-                Console.ResetColor();
+                int leftPosition = Console.CursorLeft;
+                int topPosition = Console.CursorTop;
+
+                for (int i = 0; i < cats.Count; i++)
+                {
+                    string message = cats[i].GetStatus("");
+                    int color = Convert.ToInt32(message.Substring(0, 1));
+                    Console.SetCursorPosition(0, i);
+                    Console.ForegroundColor = (ConsoleColor)color;
+                    Console.Write(message.Substring(2).Trim().PadRight(50));
+                    Console.ResetColor();
+                }
+                Console.SetCursorPosition(0, CatsCount);
+                Console.Write($"Еды в вольере: + {FoodResourse}".PadRight(50));
+                Console.SetCursorPosition(leftPosition, topPosition);
             }
-            Console.SetCursorPosition(0, CatsCount);
-            Console.Write($"Еды в вольере: + {FoodResourse}".PadRight(50));
-            Console.SetCursorPosition(leftPosition, topPosition);
         }
     }
 }

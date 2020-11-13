@@ -8,7 +8,7 @@ namespace Koshka
 {
     class Cat
     {
-        int _hungryStatus;
+        sbyte _hungryStatus = 100;
         public event EventHandler HungryStatusChanged;
         public Cat(string name, DateTime birthday)
         {
@@ -16,8 +16,8 @@ namespace Koshka
             BirthDay = birthday;
             Task.Run(LifeCircle);
         }
-    public string Name
-    {
+        public string Name
+        {
             get;
             set;
         }
@@ -35,29 +35,25 @@ namespace Koshka
             return (DateTime.Today - BirthDay).Days / 365;
         }
 
-        public byte HungryStatus
+        public sbyte HungryStatus
         {
-            get { return (byte)_hungryStatus; }
+            get { return _hungryStatus; }
             set
             {
-                int Status2 = 0;
+                sbyte Status2 = 0;
                 if (value < 0)
                     Status2 = 0;
                 else if (value > 100)
+                    Status2 = 100;
+                else
                     Status2 = value;
-                if (Status2 != _hungryStatus) ;
-                else
-                    _hungryStatus = value;
-                if (_hungryStatus != value)
-                {
+                bool invoke = _hungryStatus > Status2;
+                _hungryStatus = Status2;
+                if (invoke)
                     HungryStatusChanged?.Invoke(this, null);
-                    _hungryStatus = Status2;
-                }
-                else
-                    _hungryStatus = 0;
             }
         }
-        public void Feed(byte needFood)
+        public void Feed(sbyte needFood)
         {
             HungryStatus += needFood;
         }
@@ -67,7 +63,6 @@ namespace Koshka
             string name = Name;
             string age = Convert.ToString(GetAge());
             string status = Convert.ToString(HungryStatus);
-            Console.WriteLine($" {Name}, Возраст: {GetAge()}, {HungryStatus}");
             if (HungryStatus < 10)
             {
                 color = Convert.ToString(Convert.ToInt32(Console.ForegroundColor = ConsoleColor.DarkRed));
@@ -88,15 +83,14 @@ namespace Koshka
             {
                 color = Convert.ToString(Convert.ToInt32(Console.ForegroundColor = ConsoleColor.Green));
             }
-            string getStatus = $"{color}, Имя: {name}, Возраст: {age}, Статус: {status}";
-            return getStatus;
+            return $"{color} Имя: {name}, Возраст: {age}, Статус: {status}";
         }
 
         public async Task LifeCircle()
         {
-            await Task.Delay(100);
+            await Task.Delay(200);
             HungryStatus -= 10;
-            await LifeCircle(); ;
+            await LifeCircle(); 
         }
     }
 }
